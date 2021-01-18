@@ -25,14 +25,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.temporal.ChronoField;
 import java.time.temporal.TemporalAccessor;
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
@@ -181,11 +174,12 @@ public class Augmentation {
      */
     public static <T> String join(Iterable<T> receiver, String separator) {
         StringBuilder sb = new StringBuilder();
-        for (T t : receiver) {
-            if (sb.length() > 0) {
+        Iterator<T> iterator = receiver.iterator();
+        while (iterator.hasNext()) {
+            sb.append(iterator.next());
+            if (iterator.hasNext()) {
                 sb.append(separator);
             }
-            sb.append(t);
         }
         return sb.toString();
     }
